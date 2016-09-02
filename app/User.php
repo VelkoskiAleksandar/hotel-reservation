@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['role_names', 'role_list'];
+
     public function roles()
     {
         return $this->belongsToMany('App\Role');
@@ -37,5 +39,15 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany('App\Reservation');
+    }
+
+    public function getRoleListAttribute()
+    {
+        return $this->roles->lists('id')->toArray();
+    }
+
+    public function getRoleNamesAttribute()
+    {
+        return $this->roles->lists('role')->all();
     }
 }
