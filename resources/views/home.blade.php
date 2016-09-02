@@ -12,9 +12,7 @@
 
                     <h3>Pages</h3>
                     <ul>
-                        <li>
-                            {{--<a href="{{ action('VenueController@index') }}">Venues</a>--}}
-                        </li>
+                        <li><a href="{{ action('HotelController@create') }}">Create Hotel</a></li>
 
 
                     </ul>
