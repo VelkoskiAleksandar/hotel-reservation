@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OffersTableSeeder::class);
         $this->call(OfferRoomSeeder::class);
         $this->call(ReservationsTableSeeder::class);
-        $this->call(HotelVisitssTableSeeder::class);
+        $this->call(HotelVisitsTableSeeder::class);
 
         Model::reguard();
     }

@@ -8,7 +8,16 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <p>You are logged in!</p>
+
+                    <h3>Pages</h3>
+                    <ul>
+                        <li>
+                            {{--<a href="{{ action('VenueController@index') }}">Venues</a>--}}
+                        </li>
+
+
+                    </ul>
                 </div>
             </div>
         </div>

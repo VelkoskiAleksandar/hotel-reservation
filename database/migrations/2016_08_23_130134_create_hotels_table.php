@@ -14,14 +14,14 @@ class CreateHotelsTable extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('city');
             $table->timestamps();
         });
 
         Schema::table('hotels', function (Blueprint $table) {
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

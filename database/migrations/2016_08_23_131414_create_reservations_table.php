@@ -16,7 +16,7 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->integer('offer_id')->unsigned();
             $table->integer('room_id')->unsigned();
-            $table->integer('visitor_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->date('start');
             $table->date('end');
             $table->integer('rating');
@@ -27,7 +27,7 @@ class CreateReservationsTable extends Migration
         Schema::table('reservations', function (Blueprint $table) {
             $table->foreign('offer_id')->references('id')->on('offers');
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->foreign('visitor_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
