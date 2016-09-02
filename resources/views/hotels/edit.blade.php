@@ -14,7 +14,7 @@
 
                         {!! Form::close() !!}
 
-                        {!! Form::model($hotel, ['action' => ['HotelController@destroy', $hotel->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['action' => ['HotelController@destroy', $hotel->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

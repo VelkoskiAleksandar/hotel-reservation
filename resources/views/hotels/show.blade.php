@@ -9,5 +9,8 @@
     <div class="panel-body">
         <a href="{{ action("HotelController@edit", ['id' => $hotel->id]) }}">Edit Hotel</a>
     </div>
+    <div class="panel-body">
+        <a href="{{ action("RoomController@create", ['id' => $hotel->id]) }}">Create rooms</a>
+    </div>
 
 @endsection

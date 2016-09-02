@@ -48,7 +48,7 @@ class HotelController extends Controller
 
         $this->saveHotel($hotel, $input);
 
-        return redirect('/hotels/create');
+        return redirect('/hotels');
     }
 
     /**
