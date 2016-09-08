@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -75,6 +75,23 @@
                                 @if ($errors->has('hotel_owner'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('hotel_owner') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                            <label for="file" class="col-md-4 control-label">Hotel Owner Data: </label>
+
+                            <div class="col-md-6">
+                                {{--<input id="file" type="file" class="form-control" name="file">--}}
+                                <label class="btn btn-default btn-file">
+                                    Browse <input type="file" name="file" style="display: none;">
+                                </label>
+
+                                @if ($errors->has('file'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('file') }}</strong>
                                     </span>
                                 @endif
                             </div>

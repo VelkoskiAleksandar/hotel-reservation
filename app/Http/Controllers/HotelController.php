@@ -42,11 +42,9 @@ class HotelController extends Controller
      */
     public function store(HotelRequest $request)
     {
-        $input = $request->all();
-
         $hotel = new Hotel();
 
-        $this->saveHotel($hotel, $input);
+        $this->saveHotel($hotel, $request);
 
         return redirect('/hotels/'.$hotel->id);
     }
@@ -59,6 +57,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
+//        return $hotel;
         return view('hotels.show', compact('hotel'));
     }
 
@@ -82,9 +81,7 @@ class HotelController extends Controller
      */
     public function update(HotelRequest $request, Hotel $hotel)
     {
-        $input = $request->all();
-
-        $this->saveHotel($hotel, $input);
+        $this->saveHotel($hotel, $request);
 
         return redirect('/hotels/'.$hotel->id);
     }
@@ -102,11 +99,21 @@ class HotelController extends Controller
         return redirect('/hotels');
     }
 
-    private function saveHotel($hotel, $input)
+    private function saveHotel($hotel, HotelRequest $request)
     {
+        $input = $request->all();
+
         $hotel->user_id = \Auth::user()->id;
         $hotel->name = $input['name'];
         $hotel->city = $input['city'];
+        $hotel->country = $input['country'];
+        $hotel->stars = $input['stars'];
+        $hotel->parking_space = $input['parking_space'];
+        $hotel->wifi = $input['wifi'];
+        $hotel->pet_friendly = $input['pet_friendly'];
+        $hotel->indoor_pool = $input['indoor_pool'];
+        $hotel->outdoor_pool = $input['outdoor_pool'];
+        $hotel->spa = $input['spa'];
 
         $hotel->save();
     }

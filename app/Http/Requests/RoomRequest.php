@@ -27,6 +27,12 @@ class RoomRequest extends Request
             'number' => 'required',
             'floor' => 'required',
             'num_beds' => 'required',
+            'floor_area' => 'required',
+            'balcony' => 'required',
+            'air_conditioning' => 'required',
+            'bathroom' => 'required',
+            'minibar' => 'required',
+            'smoking' => 'required',
         ];
     }
 }

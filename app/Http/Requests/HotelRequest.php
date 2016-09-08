@@ -26,6 +26,14 @@ class HotelRequest extends Request
         return [
             'name' => 'required',
             'city' => 'required',
+            'country' => 'required',
+            'stars' => 'required',
+            'parking_space' => 'required',
+            'wifi' => 'required',
+            'pet_friendly' => 'required',
+            'indoor_pool' => 'required',
+            'outdoor_pool' => 'required',
+            'spa' => 'required',
         ];
     }
 }

@@ -17,6 +17,7 @@ class CreateRoleUserTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->boolean('confirmed')->default(false);
+            $table->string('verification_data');
             $table->timestamps();
         });
 

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,3 +28,7 @@ Route::patch('users/{users}/validate', 'UserController@validateUser');
 Route::resource('users', 'UserController');
 
 Route::resource('/hotels/{hotels}/rooms', 'RoomController');
+
+Route::get('/test', function() {
+   dd(Input::file('da'));
+});

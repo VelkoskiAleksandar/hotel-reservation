@@ -130,6 +130,12 @@ class RoomController extends Controller
         $room->number = $input['number'];
         $room->floor = $input['floor'];
         $room->num_beds = $input['num_beds'];
+        $room->floor_area = $input['floor_area'];
+        $room->balcony = $input['balcony'];
+        $room->air_conditioning = $input['air_conditioning'];
+        $room->bathroom = $input['bathroom'];
+        $room->minibar = $input['minibar'];
+        $room->smoking = $input['smoking'];
 
         $room->save();
     }

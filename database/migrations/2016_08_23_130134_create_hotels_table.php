@@ -17,6 +17,14 @@ class CreateHotelsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('city');
+            $table->string('country');
+            $table->string('stars');
+            $table->string('parking_space');
+            $table->string('wifi');
+            $table->string('pet_friendly');
+            $table->string('indoor_pool');
+            $table->string('outdoor_pool');
+            $table->string('spa');
             $table->timestamps();
         });
 

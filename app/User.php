@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('App\Role')->withPivot(['confirmed']);
+        return $this->belongsToMany('App\Role')->withPivot(['confirmed', 'verification_data']);
     }
 
     public function hotels()

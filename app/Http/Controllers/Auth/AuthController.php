@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\FileUploadController;
 use App\User;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -52,6 +54,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'file' => 'mimes:pdf',
         ]);
     }
 
@@ -63,15 +66,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $file_controller = new FileUploadController();
+        $response = $file_controller->upload();
 
-        $hotel_owner_id = array_key_exists('hotel_owner', $data) ? [2] : [];
-        $user->roles()->sync($hotel_owner_id);
+        if ($response->getStatusCode() === 200) {
+            $file_name = $response->getContent();
 
-        return $user;
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password'])
+            ]);
+
+            $hotel_owner_id = array_key_exists('hotel_owner', $data) ? [2 => ['verification_data' => $file_name]] : [];
+            $user->roles()->sync($hotel_owner_id);
+
+            return $user;
+        }
+
     }
 }

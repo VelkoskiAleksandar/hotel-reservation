@@ -19,6 +19,12 @@ class CreateRoomsTable extends Migration
             $table->integer('number');
             $table->integer('floor');
             $table->integer('num_beds');
+            $table->string('floor_area');
+            $table->string('balcony');
+            $table->string('air_conditioning');
+            $table->string('bathroom');
+            $table->string('minibar');
+            $table->string('smoking');
             $table->boolean('occupied');
             $table->timestamps();
         });

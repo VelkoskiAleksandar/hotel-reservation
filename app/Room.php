@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    // ['id', 'hotel_id', 'number', 'floor', 'num_beds', 'occupied']
+    // ['id', 'hotel_id', 'number', 'floor', 'num_beds', 'floor_area', 'balcony', 'air_conditioning', 'bathroom', 'minibar', 'smoking', 'occupied']
 
-    protected $fillable = ['number', 'floor', 'num_beds', 'occupied'];
+    protected $fillable = ['number', 'floor', 'num_beds', 'floor_area', 'balcony', 'air_conditioning', 'bathroom', 'minibar', 'smoking'];
 
     public function hotel()
     {
