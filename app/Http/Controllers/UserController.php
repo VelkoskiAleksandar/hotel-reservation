@@ -13,12 +13,12 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = $this->filterUsers($request);
 
         return view('users.index', compact('users'));
     }
@@ -110,9 +110,38 @@ class UserController extends Controller
         $user->name= $input['name'];
         $user->email = $input['email'];
         $user->password = bcrypt($input['password_edit']);
+        $roles_input = $input['role_list'];
 
         $user->save();
+
+        $roles = [];
+        if ($roles_input !== null){
+            foreach ($roles_input as $role){
+                $roles[$role] = ["confirmed" => 1];
+            }
+        } else {
+            $roles = [];
+        }
+
+        $user->roles()->sync($roles);
     }
 
+    private function filterUsers(Request $request)
+    {
+        $users = User::all();
+        $tmp = [];
 
+        if ($request->has('validate')){
+            foreach ($users as $user){
+                foreach ($user->roles()->get() as $role){
+                    if ($role->pivot->confirmed  === 0){
+                        $tmp[] = $user;
+                    }
+                }
+            }
+            $users = $tmp;
+        }
+
+        return $users;
+    }
 }

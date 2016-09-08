@@ -63,10 +63,15 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $hotel_owner_id = array_key_exists('hotel_owner', $data) ? [2] : [];
+        $user->roles()->sync($hotel_owner_id);
+
+        return $user;
     }
 }

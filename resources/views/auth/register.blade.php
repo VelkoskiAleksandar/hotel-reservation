@@ -66,6 +66,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('hotel_owner') ? ' has-error' : '' }}">
+                            <label for="hotel_owner" class="col-md-4 control-label">Hotel Owner</label>
+
+                            <div class="col-md-6">
+                                <input id="hotel_owner" type="radio" class="form-control" name="hotel_owner">
+
+                                @if ($errors->has('hotel_owner'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('hotel_owner') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" id="submit" name="submit">

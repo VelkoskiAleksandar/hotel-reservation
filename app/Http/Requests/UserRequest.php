@@ -26,8 +26,8 @@ class UserRequest extends Request
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,id,'.\Auth::user()->id,
-            'password_edit' => 'required|min:6',
-            'password_confirmation' => 'required|same:password_edit',
+            'password_edit' => 'min:6',
+            'password_confirmation' => 'same:password_edit',
         ];
     }
 }
