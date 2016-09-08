@@ -9,5 +9,4 @@
     <div class="panel-body">
         <a href="{{ action("UserController@edit", ['id' => $user->id]) }}">Edit User</a>
     </div>
-
 @endsection

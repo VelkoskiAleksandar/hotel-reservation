@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = $this->filterUsers($request);
+        $users = User::all();
 
         return view('users.index', compact('users'));
     }
@@ -105,6 +105,33 @@ class UserController extends Controller
         return redirect('/users');
     }
 
+    public function validateList(Request $request)
+    {
+        $users = User::all();
+        $users_to_validate = [];
+
+        foreach ($users as $user){
+            foreach ($user->roles()->get() as $role){
+                if ($role->pivot->confirmed === 0){
+                    $user["role_to_validate"] = $role;
+                    $users_to_validate[] = $user;
+                }
+            }
+        }
+        $users = $users_to_validate;
+
+        return view('users.validate', compact('users'));
+    }
+
+    public function validateUser(Request $request, User $user)
+    {
+        $role = $request->get('role');
+
+        $user->roles()->updateExistingPivot($role, ['confirmed' => 1]);
+
+        return redirect('/users/validate');
+    }
+
     private function saveUser($user, $input)
     {
         $user->name= $input['name'];
@@ -124,24 +151,5 @@ class UserController extends Controller
         }
 
         $user->roles()->sync($roles);
-    }
-
-    private function filterUsers(Request $request)
-    {
-        $users = User::all();
-        $tmp = [];
-
-        if ($request->has('validate')){
-            foreach ($users as $user){
-                foreach ($user->roles()->get() as $role){
-                    if ($role->pivot->confirmed  === 0){
-                        $tmp[] = $user;
-                    }
-                }
-            }
-            $users = $tmp;
-        }
-
-        return $users;
     }
 }
