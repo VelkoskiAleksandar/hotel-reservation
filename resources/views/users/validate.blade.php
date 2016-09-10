@@ -11,6 +11,7 @@
                     <h2>{{$user->name}}</h2>
                     <p>Email: {{ $user->email}}</p>
                     <p>Role to validate: {{ $user->role_to_validate->role}}</p>
+                    <p><a href="/storage/public/{{ $user->role_to_validate->pivot->verification_data }}">User info</a></p>
                 </div>
                 <div>
                     {!! Form::open(['action' => ['UserController@validateUser', 'id' => $user->id, 'role' => $user->role_to_validate->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
