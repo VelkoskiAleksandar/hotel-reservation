@@ -18,7 +18,7 @@ class FileUploadController extends Controller
         // getting all of the post data
         $file = array($fileInputFieldName => Input::file($fileInputFieldName));
 
-        if (Input::file($fileInputFieldName)->isValid()) {
+        if (Input::file($fileInputFieldName) !== null && Input::file($fileInputFieldName)->isValid()) {
             $extension = Input::file($fileInputFieldName)->getClientOriginalExtension(); // getting image extension
             $fileName = rand(11111,99999).'.'.$extension; // renaming image
             Storage::disk('files')->put($fileName, File::get($file[$fileInputFieldName]));

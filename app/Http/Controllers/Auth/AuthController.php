@@ -69,20 +69,19 @@ class AuthController extends Controller
         $file_controller = new FileUploadController();
         $response = $file_controller->upload();
 
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
+
         if ($response->getStatusCode() === 200) {
             $file_name = $response->getContent();
 
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password'])
-            ]);
-
             $hotel_owner_id = array_key_exists('hotel_owner', $data) ? [2 => ['verification_data' => $file_name]] : [];
             $user->roles()->sync($hotel_owner_id);
-
-            return $user;
         }
 
+        return $user;
     }
 }

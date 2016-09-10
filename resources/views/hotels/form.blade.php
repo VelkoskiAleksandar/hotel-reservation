@@ -100,7 +100,7 @@
 
 <div class="form-group">
     <div class="col-md-6 col-md-offset-4">
-        {!! Form::button('<i class="fa '.$submitButtonIcon.'" aria-hidden="true"></i> '.$submitButtonText, ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+        {!! Form::button('<i class="fa '.$submitButtonIcon.'" aria-hidden="true"></i> '.$submitButtonText, ['class' => 'btn btn-primary', 'type' => 'submit', 'name' => 'submit']) !!}
     </div>
 </div>
 

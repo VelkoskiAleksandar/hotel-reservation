@@ -20,7 +20,7 @@ class AuthTest extends TestCase
             ->type('a@a.a', 'email')
             ->type('dadada', 'password')
             ->press('submit')
-            ->seePageIs('/')
+            ->seePageIs('/home')
             ->seeInElement('#id_username', 'admin');
     }
 
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
             ->type('dadada', 'password')
             ->type('dadada', 'password_confirmation')
             ->press('submit')
-            ->seePageIs('/')
+            ->seePageIs('/home')
             ->seeInElement('#id_username', 'test');
     }
 
