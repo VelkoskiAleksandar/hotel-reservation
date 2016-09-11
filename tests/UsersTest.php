@@ -41,7 +41,7 @@ class UsersTest extends TestCase
         $this->login();
         $user_id = $this->insertUser();
 
-        $this->visit('/users/'.$user_id.'/show')
+        $this->visit('/users/'.$user_id)
             ->seeInElement('h2', 'TestUser');
     }
 
@@ -50,10 +50,13 @@ class UsersTest extends TestCase
         $this->login();
         $user_id = $this->insertUser();
 
+        $this->followRedirects();
+
         $this->visit('/users/'.$user_id.'/edit')
             ->type('TestUser1', 'name')
             ->press('submit')
-            ->assertRedirectedTo('/users/'.$user_id.'/show')
+            ->assertResponseOk()
+            ->seePageIs('/users/'.$user_id)
             ->seeInElement('h2', 'TestUser');
     }
 
