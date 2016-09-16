@@ -31,6 +31,8 @@ class OfferController extends Controller
      */
     public function create(Hotel $hotel)
     {
+        //TODO: Add offer to rooms when creating the offer. Currently the offer is not assigned to any room.
+
         return view('offers.create', compact('hotel'));
     }
 
