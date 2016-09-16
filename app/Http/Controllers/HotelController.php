@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HotelController extends Controller
 {
@@ -18,8 +19,8 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all()
-            ->where('validated', 1);
+        $hotels = Hotel::where('validated', 1)
+            ->get();
 
         return view('hotels.index', compact('hotels'));
     }
@@ -100,23 +101,39 @@ class HotelController extends Controller
         return redirect('/hotels');
     }
 
-    public function validateList()
+    public function validateList(Request $request)
     {
 //        return Hotel::all();
-        $hotels = Hotel::all()
-            ->where('validated', 0);
+        $hotels = [];
+        if (Gate::allows('validate-hotels', $request)) {
+            $hotels = Hotel::where('validated', 0)
+                ->where('num_validation', '<', 4)
+                ->get();
+        }
+
+        return view('hotels.validate', compact('hotels'));
+    }
+
+    public function rejectedList(Request $request)
+    {
+        $hotels = [];
+        if (Gate::allows('validate-hotels', $request)) {
+            $hotels = Hotel::where('validated', 2)
+                ->get();
+        }
 
         return view('hotels.validate', compact('hotels'));
     }
 
     public function validateHotel(Request $request, Hotel $hotel)
     {
-        $hotel->num_validation = $hotel->num_validation + 1;
-        $hotel->validated = $request->has('validate') ? 1 : 2;
-        //TODO: send mail to owner if the hotels wasn't validated
+        if (Gate::allows('validate-hotels', $request)) {
+            $hotel->num_validation = $hotel->num_validation + 1;
+            $hotel->validated = $request->has('validate') ? 1 : 2;
+            //TODO: send mail to owner if the hotels wasn't validated
 
-        $hotel->save();
-
+            $hotel->save();
+        }
         return redirect('hotels/validate');
     }
 

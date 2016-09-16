@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -108,29 +109,33 @@ class UserController extends Controller
 
     public function validateList(Request $request)
     {
-        $users = User::all();
-        $users_to_validate = [];
+        $users = [];
+        if (Gate::allows('validate-users', $request)) {
+            $users = User::all();
+            $users_to_validate = [];
 
-        foreach ($users as $user){
-            foreach ($user->roles()->get() as $role){
-                if ($role->pivot->confirmed === 0){
-                    $user["role_to_validate"] = $role;
-                    $users_to_validate[] = $user;
+            foreach ($users as $user){
+                foreach ($user->roles()->get() as $role){
+                    if ($role->pivot->confirmed === 0){
+                        $user["role_to_validate"] = $role;
+                        $users_to_validate[] = $user;
+                    }
                 }
             }
+            $users = $users_to_validate;
         }
-        $users = $users_to_validate;
-
         return view('users.validate', compact('users'));
     }
 
     public function validateUser(Request $request, User $user)
     {
-        $role = $request->get('role');
+        if (Gate::allows('validate-users', $request)) {
+            $role = $request->get('role');
 
-        $user->roles()->updateExistingPivot($role, ['confirmed' => 1]);
+            $user->roles()->updateExistingPivot($role, ['confirmed' => 1]);
 
-        return redirect('/users/validate');
+            return redirect('/users/validate');
+        }
     }
 
     private function saveUser($user, $input)
