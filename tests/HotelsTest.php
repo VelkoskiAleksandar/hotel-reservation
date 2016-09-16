@@ -64,6 +64,7 @@ class HotelsTest extends TestCase
 
         $hotel->user_id = 1;
         $hotel->name = 'TestHotelName';
+        $hotel->validated = 1;
         $hotel->city = 'TestCity';
         $hotel->country = 'TestCountry';
         $hotel->stars = '5';

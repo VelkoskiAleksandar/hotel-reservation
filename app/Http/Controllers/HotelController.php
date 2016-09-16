@@ -18,7 +18,8 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::all()
+            ->where('validated', 1);
 
         return view('hotels.index', compact('hotels'));
     }
@@ -97,6 +98,26 @@ class HotelController extends Controller
         $hotel->delete();
 
         return redirect('/hotels');
+    }
+
+    public function validateList()
+    {
+//        return Hotel::all();
+        $hotels = Hotel::all()
+            ->where('validated', 0);
+
+        return view('hotels.validate', compact('hotels'));
+    }
+
+    public function validateHotel(Request $request, Hotel $hotel)
+    {
+        $hotel->num_validation = $hotel->num_validation + 1;
+        $hotel->validated = $request->has('validate') ? 1 : 2;
+        //TODO: send mail to owner if the hotels wasn't validated
+
+        $hotel->save();
+
+        return redirect('hotels/validate');
     }
 
     private function saveHotel($hotel, HotelRequest $request)

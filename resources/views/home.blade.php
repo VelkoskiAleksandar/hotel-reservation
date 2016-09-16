@@ -13,6 +13,7 @@
                     <h3>Pages</h3>
                     <ul>
                         <li><a href="{{ action('HotelController@index') }}">Hotels</a></li>
+                        <li><a href="{{ action('HotelController@validateList') }}">Validate Hotels</a></li>
                         <li><a href="{{ action('HotelController@create') }}">Create Hotel</a></li>
                         <li><a href="{{ action('UserController@index') }}">Users</a></li>
                         <li><a href="{{ action('UserController@validateList') }}">Validate Users</a></li>

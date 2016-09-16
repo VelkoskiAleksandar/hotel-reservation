@@ -21,6 +21,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('hotels/validate', 'HotelController@validateList');
+Route::patch('hotels/{hotels}/validate', 'HotelController@validateHotel');
 Route::resource('hotels', 'HotelController');
 
 Route::get('users/validate', 'UserController@validateList');

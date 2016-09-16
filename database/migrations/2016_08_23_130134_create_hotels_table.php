@@ -15,6 +15,8 @@ class CreateHotelsTable extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('validated')->default(false);
+            $table->integer('num_validation')->default(0);
             $table->string('name');
             $table->string('city');
             $table->string('country');
