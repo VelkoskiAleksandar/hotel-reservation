@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
-    // ['id', 'name', 'price', 'num_days', 'description']]
+    // ['id', 'hotel_id', 'name', 'price', 'num_days', 'description']]
 
     protected $fillable = ['name', 'price', 'num_days', 'description'];
 
@@ -20,4 +20,8 @@ class Offer extends Model
         return $this->hasMany('App\Reservation');
     }
 
+    public function hotel()
+    {
+        return $this->belongsTo('App\Hotel');
+    }
 }

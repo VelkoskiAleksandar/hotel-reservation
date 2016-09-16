@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit Hotel</div>
+                    <div class="panel-heading">Add Rooms</div>
                     <div class="panel-body">
 
                         {!! Form::open(['action' => ['RoomController@store', $hotel], 'method' => 'POST', 'class' => 'form-horizontal']) !!}

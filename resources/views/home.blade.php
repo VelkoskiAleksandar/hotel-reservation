@@ -16,6 +16,9 @@
                         <li><a href="{{ action('HotelController@validateList') }}">Validate Hotels</a></li>
                         <li><a href="{{ action('HotelController@rejectedList') }}">Rejected Hotels</a></li>
                         <li><a href="{{ action('HotelController@create') }}">Create Hotel</a></li>
+
+                        <br>
+
                         <li><a href="{{ action('UserController@index') }}">Users</a></li>
                         <li><a href="{{ action('UserController@validateList') }}">Validate Users</a></li>
                         <li><a href="{{ action('UserController@create') }}">Create Users</a></li>

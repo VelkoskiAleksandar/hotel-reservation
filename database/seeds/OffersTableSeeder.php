@@ -15,7 +15,7 @@ class OffersTableSeeder extends Seeder
         $offers = array();
 
         foreach (range(1, 4) as $number) {
-            $offers[] = ['name' => $faker->word, 'price' => $faker->numberBetween(100, 1000), 'num_days' => $faker->numberBetween(1, 4), 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()];
+            $offers[] = ['hotel_id' => $faker->numberBetween(1, 2), 'name' => $faker->word, 'price' => $faker->numberBetween(100, 1000), 'num_days' => $faker->numberBetween(1, 4), 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()];
         }
 
         DB::table('offers')->insert($offers);

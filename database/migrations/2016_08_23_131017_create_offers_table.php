@@ -15,12 +15,18 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('hotel_id')->unsigned();
             $table->string('name');
             $table->integer('price');
             $table->integer('num_days');
             $table->string('description');
             $table->timestamps();
         });
+
+        Schema::table('offers', function (Blueprint $table) {
+            $table->foreign('hotel_id')->references('id')->on('hotels');
+        });
+
     }
 
     /**

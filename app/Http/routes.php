@@ -32,6 +32,8 @@ Route::resource('users', 'UserController');
 
 Route::resource('/hotels/{hotels}/rooms', 'RoomController');
 
+Route::resource('/hotels/{hotels}/offers', 'OfferController');
+
 Route::get('/test', function() {
    dd(Input::file('da'));
 });
